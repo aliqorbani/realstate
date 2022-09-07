@@ -1,0 +1,146 @@
+@import "iransans";
+@import "../../../../node_modules/bootstrap/scss/functions";
+@import "../../../../node_modules/bootstrap/scss/variables";
+@import "../../../../node_modules/bootstrap/scss/mixins";
+
+$enable-shadows: true;
+$enable-gradients: true;
+$enable-negative-margins: true;
+$link-decoration: none;
+$custom-red: #ef5350;
+$theme-colors: map-merge($theme-colors, (
+        "custom-red": $custom-red
+));
+@import "../../../../node_modules/bootstrap/scss/bootstrap";
+body {
+  direction: rtl;
+  font-family: 'IRANSans', 'Tahoma', sans-serif;
+}
+
+ul, ol, li {
+  padding: 0;
+  margin: 0;
+}
+
+a, button, .nav-item, .button, .accordion {
+  @include transition();
+}
+
+.property-title-link {
+  color: $black;
+
+  &:hover, &:focus {
+    color: $secondary;
+  }
+}
+
+.card-has-ribbon {
+  position: relative;
+}
+
+.ribbon {
+  position: absolute;
+  left: -5px;
+  top: -5px;
+  z-index: 1;
+  overflow: hidden;
+  width: 75px;
+  height: 75px;
+  text-align: right;
+
+  span {
+    font-size: 10px;
+    font-weight: bold;
+    color: $white;
+    text-transform: uppercase;
+    text-align: center;
+    line-height: 20px;
+    transform: rotate(-45deg);
+
+    width: 100px;
+    display: block;
+    background: $primary;
+    box-shadow: 0 3px 10px -5px rgba(0, 0, 0, 1);
+    position: absolute;
+    top: 19px;
+    left: -21px;
+
+    &::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 100%;
+      z-index: -1;
+      border-left: 3px solid $primary;
+      border-right: 3px solid transparent;
+      border-bottom: 3px solid transparent;
+      border-top: 3px solid $primary;
+    }
+
+    &::after {
+      content: "";
+      position: absolute;
+      right: 0;
+      top: 100%;
+      z-index: -1;
+      border-left: 3px solid transparent;
+      border-right: 3px solid $primary;
+      border-bottom: 3px solid transparent;
+      border-top: 3px solid $primary;
+    }
+  }
+
+  &.ribbon-pending {
+    span {
+      background: $warning;
+
+      &::before, &::after {
+        border-top-color: $warning;
+      }
+
+      &::before {
+        border-left-color: $warning;
+      }
+
+      &::after {
+        border-right-color: $warning;
+      }
+    }
+  }
+
+  &.ribbon-sold {
+    span {
+      background: $danger;
+
+      &::before, &::after {
+        border-top-color: $danger;
+      }
+
+      &::before {
+        border-left-color: $danger;
+      }
+
+      &::after {
+        border-right-color: $danger;
+      }
+    }
+  }
+
+  &.ribbon-publish {
+    span {
+      background: $primary;
+
+      &::before, &::after {
+        border-top-color: $primary;
+      }
+
+      &::before {
+        border-left-color: $primary;
+      }
+
+      &::after {
+        border-right-color: $primary;
+      }
+    }
+  }
+}
