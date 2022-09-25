@@ -136,7 +136,7 @@ echo view('admin/includes/sidebar', ['active_submenu' => '']); ?>
                                 <div class="form-group row">
                                     <div class="col-12 col-sm-6">
                                         <?php
-                                        echo form_submit('save', 'ذخیره', ['id' => 'save', 'class' => 'btn btn-lg btn-success']); ?>
+                                        echo form_button('save', 'ذخیره', ['id' => 'save', 'class' => 'btn btn-lg btn-success']); ?>
                                     </div>
                                 </div>
                                 <?php echo form_close(); ?>
@@ -164,8 +164,29 @@ $list_url        = route_to('admin-property-gallery-items', $property['id']);
 $panorama_upload = '';
 $custom_scripts  .= <<<CUSTOM_SCRIPTS
 <script>
-   Dropzone.autoDiscover = false;
-
+   // Dropzone.autoDiscover = false;
+   $('#edit-form').on('submit',function(e){
+    e.preventDefault()
+    let data_object = {}
+    let form_data = $('#edit-form').serializeArray();
+       // formData.append('property_id',$id)
+       $.each(form_data, function(key, el) {
+            data_object.append(el.name, el.value)
+       });
+       $.ajax({
+           url : "$upload_url",
+           dataType : 'JSON',
+           data : data_object,
+           type : "post",
+           success: function(response){
+               console.log(response);
+           },
+           error: function(error){
+               console.log(error)
+           }
+       })
+   })
+   
    var myDropzone = new Dropzone(".gallery-items",{
        url : "$upload_url",
        autoProcessQueue: false,
@@ -191,7 +212,7 @@ $custom_scripts  .= <<<CUSTOM_SCRIPTS
                 }
             });
            // console.log('test')
-           $('#edit-form').on('submit',function(e){
+           $('#edit-form #save').on('click',function(e){
                e.preventDefault()
                myDropzone.processQueue()
            })
