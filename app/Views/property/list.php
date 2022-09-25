@@ -1,5 +1,11 @@
 <?php
 /** @var array $properties */
+$statuses = [
+    'pending' => 'در دست بررسی',
+    'publish' => 'منتشر شده',
+    'sold'    => 'فروش رفته',
+    '0'       => 'نامشخص',
+];
 ?><!doctype html>
 <html lang="en">
 <head>
@@ -13,14 +19,14 @@
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container">
-        <a class="navbar-brand" href="#">Navbar</a>
+        <a class="navbar-brand" href="<?php echo route_to('front-page') ?>">Property List</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Home</a>
+                    <a class="nav-link" aria-current="page" href="<?php echo route_to('admin-dashboard') ?>">Admin</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Features</a>
@@ -43,7 +49,7 @@
         foreach ($properties as $property) { ?>
             <div class="col-sm-6 col-md-4 col-lg-3 mb-4">
                 <div class="card bg-white card-has-ribbon">
-                    <div class="ribbon ribbon-<?php echo $property['status']; ?>"><span><?php echo $property['status']; ?></span></div>
+                    <div class="ribbon ribbon-<?php echo $property['status']; ?>"><span><?php echo $statuses[$property['status']]; ?></span></div>
                     <a href="<?php echo route_to('single-property', $property['id']); ?>">
                         <img class="card-img-top" src="<?php echo esc($property['thumbnail'], 'attr'); ?>" alt="<?php echo esc($property['name']); ?>">
                     </a>
@@ -54,7 +60,7 @@
                             </a>
                         </h4>
                         <div class="card-text" data-bs-toggle="popover" data-bs-placement="bottom" data-bs-content="<?php echo esc($property['description'], 'attr'); ?>" title="توضیحات">
-                            <?php echo excerpt($property['description'], null, 50) ?>
+                            <?php echo ellipsize($property['description'], 60); ?>
                         </div>
                     </div>
                     <ul class="list-unstyled list-group list-group-flush">

@@ -35,7 +35,7 @@ abstract class BaseController extends Controller
      *
      * @var array
      */
-    protected $helpers = ['custom', 'number', 'form', 'text'];
+    protected $helpers = ['custom', 'url', 'number', 'form', 'text'];
 
     /**
      * Constructor.
@@ -46,7 +46,9 @@ abstract class BaseController extends Controller
         parent::initController($request, $response, $logger);
 
         // Preload any models, libraries, etc, here.
-
-        // E.g.: $this->session = \Config\Services::session();
+//        $this->uri     = \CodeIgniter\HTTP\URI::class;
+        $this->session = \Config\Services::session();
+        $this->request = \Config\Services::request();
+        // E.g.:$this->session = \Config\Services::session();
     }
 }

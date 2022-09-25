@@ -15,23 +15,14 @@
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container">
-        <a class="navbar-brand" href="#">Navbar</a>
+        <a class="navbar-brand" href="<?php echo route_to('front-page') ?>">Property List</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Features</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Pricing</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+                    <a class="nav-link" aria-current="page" href="<?php echo route_to('admin-dashboard') ?>">Admin</a>
                 </li>
             </ul>
         </div>
@@ -88,7 +79,7 @@
                     <div class="p-3">
                         <h2 class="border-bottom pb-1">توضیحات تکمیلی این <?php echo $property['type_name']; ?></h2>
                         <p><?php echo $property['description']; ?></p>
-<!--                        <code>--><?php //echo json_encode($property, 256 | 64) ?><!--</code>-->
+                        <!--                        <code>--><?php //echo json_encode($property, 256 | 64) ?><!--</code>-->
                     </div>
                 </div>
                 <div class="tab-pane fade" id="panorama-content" role="tabpanel" aria-labelledby="panorama-tab">
@@ -99,7 +90,7 @@
                 <div class="tab-pane fade" id="mapview-content" role="tabpanel" aria-labelledby="mapview-tab">
                     <div class="p-3">
                         <h2 class="border-bottom pb-1">موقعیت مکانی این <?php echo $property['type_name']; ?></h2>
-                        <div style="height: 500px; width: 100%" data-zoom="10" data-latitude="<?php echo $property['latitude']; ?>" data-longitude="<?php echo $property['longitude']; ?>" id="property-map" class="mapview"></div>
+                        <div style="height: 500px; width: 100%" data-zoom="<?php echo $property['zoom']; ?>" data-latitude="<?php echo $property['latitude']; ?>" data-longitude="<?php echo $property['longitude']; ?>" id="property-map" class="mapview"></div>
                     </div>
                 </div>
             </div>
@@ -125,7 +116,7 @@
 
         let mapOptions = {
             center: [map_element.data('latitude'), map_element.data('longitude')],
-            zoom: 10
+            zoom: map_element.data('zoom')
         }
         if (map != undefined || map != null) {
             map.remove();

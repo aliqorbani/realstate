@@ -2,7 +2,7 @@
 <footer class="sticky-footer bg-white">
     <div class="container my-auto">
         <div class="copyright text-center my-auto">
-            <span>Copyright &copy; Your Website 2021</span>
+            <span>Copyright &copy; Ali Qorbani 2021</span>
         </div>
     </div>
 </footer>
@@ -48,12 +48,15 @@
 
 <!-- Custom scripts for all pages-->
 <script src="<?php echo assets('admin/js/sb-admin-2.min.js'); ?>"></script>
+<?php if(isset($custom_scripts)){
+    echo $custom_scripts;
+}?>
 
 <!-- Page level plugins -->
-<script src="<?php echo assets('admin/vendor/chart.js/Chart.min.js'); ?>"></script>
+<!--<script src="--><?php //echo assets('admin/vendor/chart.js/Chart.min.js'); ?><!--"></script>-->
 
 <!-- Page level custom scripts -->
-<script src="<?php echo assets('admin/js/demo/chart-area-demo.js'); ?>"></script>
-<script src="<?php echo assets('admin/js/demo/chart-pie-demo.js'); ?>'"></script>
+<!--<script src="--><?php //echo assets('admin/js/demo/chart-area-demo.js'); ?><!--"></script>-->
+<!--<script src="--><?php //echo assets('admin/js/demo/chart-pie-demo.js'); ?><!--'"></script>-->
 </body>
 </html>
